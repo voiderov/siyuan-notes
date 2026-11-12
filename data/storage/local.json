@@ -1,0 +1,55 @@
+{
+  "local-closed-tabs": [
+    {
+      "active": true,
+      "activeTime": "1794483271245",
+      "children": {
+        "action": "cb-get-scroll",
+        "blockId": "20261112193423-qwsach6",
+        "instance": "Editor",
+        "mode": "wysiwyg",
+        "notebookId": "20261112192939-gl5rv1c",
+        "rootId": "20261112193423-qwsach6"
+      },
+      "docIcon": "",
+      "instance": "Tab",
+      "pin": false,
+      "title": "Untitled"
+    }
+  ],
+  "local-fileposition": {
+    "20261112192939-86prxwy": {
+      "endId": "20261112192939-mylddny",
+      "focusEnd": 1,
+      "focusId": "20261112192939-mylddny",
+      "focusStart": 1,
+      "rootId": "20261112192939-86prxwy",
+      "scrollTop": 0,
+      "startId": "20261112192939-mylddny"
+    }
+  },
+  "local-filespaths": [
+    {
+      "expandedIDs": [
+        {
+          "id": "20261112192939-gl5rv1c",
+          "kind": "notebook"
+        }
+      ],
+      "notebookId": "20261112192939-gl5rv1c",
+      "openPaths": [],
+      "scrollAnchor": {
+        "id": "20261112192939-gl5rv1c",
+        "offset": 0
+      },
+      "version": 2
+    }
+  ],
+  "local-pinned-doc-tree-state": {
+    "collapsed": false,
+    "expanded": [],
+    "version": 2
+  },
+  "siyuan-agent-last-greeting": "agentWelcomeFirst2",
+  "siyuan-agent-last-open": 1794483301252
+}

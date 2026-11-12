@@ -1,0 +1,101 @@
+I 2026/11/12 19:29:23 working.go:159: 
+      ___                                   ___           ___           ___
+     /  /\        ___           ___        /__/\         /  /\         /__/\
+    /  /:/_      /  /\         /__/|       \  \:\       /  /::\        \  \:\
+   /  /:/ /\    /  /:/        |  |:|        \  \:\     /  /:/\:\        \  \:\
+  /  /:/ /::\  /__/::\        |  |:|    ___  \  \:\   /  /:/~/::\   _____\__\:\
+ /__/:/ /:/\:\ \__\/\:\__   __|__|:|   /__/\  \__\:\ /__/:/ /:/\:\ /__/::::::::\
+ \  \:\/:/~/:/    \  \:\/\ /__/::::\   \  \:\ /  /:/ \  \:\/:/__\/ \  \:\~~\~~\/
+  \  \::/ /:/      \__\::/    ~\~~\:\   \  \:\  /:/   \  \::/       \  \:\  ~~~
+   \__\/ /:/       /__/:/       \  \:\   \  \:\/:/     \  \:\        \  \:\
+     /__/:/        \__\/         \__\/    \  \::/       \  \:\        \  \:\
+     \__\/                                 \__\/         \__\/         \__\/
+I 2026/11/12 19:29:23 runtime.go:96: kernel is booting:
+    * ver [3.8.10]
+    * arch [amd64]
+    * os [cachyos]
+    * pid [69145]
+    * runtime mode [prod]
+    * working directory [/tmp/.mount_siyuanGDCpHd/resources]
+    * read only [false]
+    * container [std]
+    * database [ver=202607031200]
+    * workspace directory [/home/erov/SiYuan/My Notes]
+W 2026/11/12 19:29:24 conf.go:300: clean up retired install resources failed: unlinkat /tmp/.mount_siyuanGDCpHd/resources/stage/map: read-only file system
+I 2026/11/12 19:29:24 conf.go:341: initialized the specified language [en]
+I 2026/11/12 19:29:24 runtime.go:236: use network proxy [direct]
+I 2026/11/12 19:29:24 ocr.go:391: tesseract-ocr enabled [ver=5.5.4, maxSize=2 MB, langs=eng+osd]
+I 2026/11/12 19:29:24 pandoc.go:161: built-in pandoc [ver=3.10.1, bin=/tmp/.mount_siyuanGDCpHd/resources/pandoc/bin/pandoc]
+I 2026/11/12 19:29:25 blocktree.go:86: reinitialized database [/home/erov/SiYuan/My Notes/temp/blocktree.db]
+I 2026/11/12 19:29:25 database.go:146: the database structure is changed, rebuilding database...
+I 2026/11/12 19:29:25 cert.go:53: generating local CA for TLS...
+I 2026/11/12 19:29:25 cert.go:75: generating TLS server certificates signed by local CA...
+I 2026/11/12 19:29:25 cert.go:81: generated TLS certificates at [/home/erov/SiYuan/My Notes/conf]
+I 2026/11/12 19:29:25 serve.go:253: kernel [pid=69145] http server [127.0.0.1:40511] is booting (local HTTPS + HTTP/2 enabled)
+I 2026/11/12 19:29:25 blocktree.go:86: reinitialized database [/home/erov/SiYuan/My Notes/temp/blocktree.db]
+I 2026/11/12 19:29:25 database.go:161: reinitialized database [/home/erov/SiYuan/My Notes/temp/siyuan.db]
+I 2026/11/12 19:29:25 conf.go:1163: tree/block count [0/0]
+I 2026/11/12 19:29:25 working.go:222: kernel booted
+I 2026/11/12 19:29:25 manager.go:156: kernel plugins are disabled by configuration, skipping start
+I 2026/11/12 19:29:25 box.go:72: auto stat [trees=0, blocks=0, dataSize=45.06 kB, assetsSize=0 B]
+I 2026/11/12 19:29:25 disk.go:21: disk usage [total=507.82 GB, used=90.84 GB, free=414.65 GB]
+I 2026/11/12 19:29:26 fixedport.go:41: fixed port service [127.0.0.1:6806] is running (HTTP/HTTPS dual mode)
+I 2026/11/12 19:29:27 cron.go:57: cron job [[RefreshRhyResultJob]] executed
+I 2026/11/12 19:29:39 mount.go:112: created box [20261112192939-gl5rv1c]
+I 2026/11/12 19:29:40 index.go:337: rebuilt database for notebook [20261112192939-gl5rv1c] in [0.13s], tree [count=1, size=313 B]
+I 2026/11/12 19:29:40 index.go:432: resolved refs [0] in [0ms]
+I 2026/11/12 19:30:14 process.go:23: received os signal [terminated], exit kernel process now
+I 2026/11/12 19:30:14 conf.go:738: exiting kernel [force=false, setCurrentWorkspace=true, execInstallPkg=1]
+I 2026/11/12 19:30:14 manager.go:194: kernel plugin manager is already stopped, skipping stop
+I 2026/11/12 19:30:14 database.go:1558: closed database
+I 2026/11/12 19:30:14 conf.go:1383: cleared workspace temp
+I 2026/11/12 19:30:15 sync.go:1270: sync websocket closed
+I 2026/11/12 19:30:45 working.go:159: 
+      ___                                   ___           ___           ___
+     /  /\        ___           ___        /__/\         /  /\         /__/\
+    /  /:/_      /  /\         /__/|       \  \:\       /  /::\        \  \:\
+   /  /:/ /\    /  /:/        |  |:|        \  \:\     /  /:/\:\        \  \:\
+  /  /:/ /::\  /__/::\        |  |:|    ___  \  \:\   /  /:/~/::\   _____\__\:\
+ /__/:/ /:/\:\ \__\/\:\__   __|__|:|   /__/\  \__\:\ /__/:/ /:/\:\ /__/::::::::\
+ \  \:\/:/~/:/    \  \:\/\ /__/::::\   \  \:\ /  /:/ \  \:\/:/__\/ \  \:\~~\~~\/
+  \  \::/ /:/      \__\::/    ~\~~\:\   \  \:\  /:/   \  \::/       \  \:\  ~~~
+   \__\/ /:/       /__/:/       \  \:\   \  \:\/:/     \  \:\        \  \:\
+     /__/:/        \__\/         \__\/    \  \::/       \  \:\        \  \:\
+     \__\/                                 \__\/         \__\/         \__\/
+I 2026/11/12 19:30:45 runtime.go:96: kernel is booting:
+    * ver [3.8.10]
+    * arch [amd64]
+    * os [cachyos]
+    * pid [69454]
+    * runtime mode [prod]
+    * working directory [/tmp/.mount_siyuangeOGfF/resources]
+    * read only [false]
+    * container [std]
+    * database [ver=202607031200]
+    * workspace directory [/home/erov/SiYuan/My Notes]
+W 2026/11/12 19:30:45 conf.go:300: clean up retired install resources failed: unlinkat /tmp/.mount_siyuangeOGfF/resources/stage/map: read-only file system
+I 2026/11/12 19:30:45 conf.go:319: loaded conf [/home/erov/SiYuan/My Notes/conf/conf.json]
+I 2026/11/12 19:30:45 runtime.go:236: use network proxy [direct]
+I 2026/11/12 19:30:46 ocr.go:391: tesseract-ocr enabled [ver=5.5.4, maxSize=2 MB, langs=eng+osd]
+I 2026/11/12 19:30:46 pandoc.go:161: built-in pandoc [ver=3.10.1, bin=/tmp/.mount_siyuangeOGfF/resources/pandoc/bin/pandoc]
+I 2026/11/12 19:30:46 working.go:671: database [/home/erov/SiYuan/My Notes/temp/siyuan.db] size [176.13 kB]
+I 2026/11/12 19:30:46 working.go:671: database [/home/erov/SiYuan/My Notes/temp/blocktree.db] size [61.44 kB]
+I 2026/11/12 19:30:46 working.go:671: database [/home/erov/SiYuan/My Notes/temp/history.db] size [24.58 kB]
+I 2026/11/12 19:30:46 working.go:671: database [/home/erov/SiYuan/My Notes/temp/asset_content.db] size [24.58 kB]
+I 2026/11/12 19:30:46 conf.go:1163: tree/block count [1/3]
+I 2026/11/12 19:30:46 working.go:222: kernel booted
+I 2026/11/12 19:30:47 manager.go:156: kernel plugins are disabled by configuration, skipping start
+I 2026/11/12 19:30:47 cert.go:62: using existing TLS certificates from [/home/erov/SiYuan/My Notes/conf]
+I 2026/11/12 19:30:47 serve.go:253: kernel [pid=69454] http server [127.0.0.1:34229] is booting (local HTTPS + HTTP/2 enabled)
+I 2026/11/12 19:30:47 box.go:72: auto stat [trees=1, blocks=3, dataSize=58.09 kB, assetsSize=0 B]
+I 2026/11/12 19:30:47 disk.go:21: disk usage [total=507.82 GB, used=90.88 GB, free=414.61 GB]
+I 2026/11/12 19:30:48 fixedport.go:41: fixed port service [127.0.0.1:6806] is running (HTTP/HTTPS dual mode)
+I 2026/11/12 19:30:48 cron.go:57: cron job [[RefreshRhyResultJob]] executed
+I 2026/11/12 19:34:35 file.go:2426: removed doc [20261112192939-gl5rv1c/20261112193423-qwsach6.sy]
+D 2026/11/12 19:34:35 websocket.go:36: websocket failed [channel="main", app=3suqi, id=fa7e7a6f-6934-425d-9942-73720781031c, type=protyle]: read tcp 127.0.0.1:34229->127.0.0.1:53274: use of closed network connection
+I 2026/11/12 19:35:03 conf.go:738: exiting kernel [force=false, setCurrentWorkspace=true, execInstallPkg=0]
+I 2026/11/12 19:35:03 manager.go:194: kernel plugin manager is already stopped, skipping stop
+I 2026/11/12 19:35:03 database.go:1558: closed database
+I 2026/11/12 19:35:03 conf.go:1383: cleared workspace temp
+I 2026/11/12 19:35:04 sync.go:1270: sync websocket closed
+I 2026/11/12 19:35:04 conf.go:907: exited kernel
