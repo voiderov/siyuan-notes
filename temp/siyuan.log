@@ -99,3 +99,53 @@ I 2026/11/12 19:35:03 database.go:1558: closed database
 I 2026/11/12 19:35:03 conf.go:1383: cleared workspace temp
 I 2026/11/12 19:35:04 sync.go:1270: sync websocket closed
 I 2026/11/12 19:35:04 conf.go:907: exited kernel
+I 2026/11/16 20:53:52 working.go:159: 
+      ___                                   ___           ___           ___
+     /  /\        ___           ___        /__/\         /  /\         /__/\
+    /  /:/_      /  /\         /__/|       \  \:\       /  /::\        \  \:\
+   /  /:/ /\    /  /:/        |  |:|        \  \:\     /  /:/\:\        \  \:\
+  /  /:/ /::\  /__/::\        |  |:|    ___  \  \:\   /  /:/~/::\   _____\__\:\
+ /__/:/ /:/\:\ \__\/\:\__   __|__|:|   /__/\  \__\:\ /__/:/ /:/\:\ /__/::::::::\
+ \  \:\/:/~/:/    \  \:\/\ /__/::::\   \  \:\ /  /:/ \  \:\/:/__\/ \  \:\~~\~~\/
+  \  \::/ /:/      \__\::/    ~\~~\:\   \  \:\  /:/   \  \::/       \  \:\  ~~~
+   \__\/ /:/       /__/:/       \  \:\   \  \:\/:/     \  \:\        \  \:\
+     /__/:/        \__\/         \__\/    \  \::/       \  \:\        \  \:\
+     \__\/                                 \__\/         \__\/         \__\/
+I 2026/11/16 20:53:52 runtime.go:96: kernel is booting:
+    * ver [3.8.10]
+    * arch [amd64]
+    * os [nobara]
+    * pid [22742]
+    * runtime mode [prod]
+    * working directory [/opt/SiYuan/resources]
+    * read only [false]
+    * container [std]
+    * database [ver=202607031200]
+    * workspace directory [/home/erov/siyuan-notes]
+I 2026/11/16 20:53:52 conf.go:319: loaded conf [/home/erov/siyuan-notes/conf/conf.json]
+I 2026/11/16 20:53:52 conf.go:341: initialized the specified language [en]
+I 2026/11/16 20:53:52 runtime.go:236: use network proxy [direct]
+I 2026/11/16 20:53:52 working.go:671: database [/home/erov/siyuan-notes/temp/siyuan.db] size [176.13 kB]
+I 2026/11/16 20:53:52 working.go:671: database [/home/erov/siyuan-notes/temp/blocktree.db] size [61.44 kB]
+I 2026/11/16 20:53:52 working.go:671: database [/home/erov/siyuan-notes/temp/history.db] size [24.58 kB]
+I 2026/11/16 20:53:52 working.go:671: database [/home/erov/siyuan-notes/temp/asset_content.db] size [24.58 kB]
+I 2026/11/16 20:53:52 conf.go:1163: tree/block count [1/2]
+I 2026/11/16 20:53:52 working.go:222: kernel booted
+I 2026/11/16 20:53:52 manager.go:156: kernel plugins are disabled by configuration, skipping start
+I 2026/11/16 20:53:52 pandoc.go:161: built-in pandoc [ver=3.10.1, bin=/opt/SiYuan/resources/pandoc/bin/pandoc]
+I 2026/11/16 20:53:52 cert.go:123: certificate missing current IP address [192.168.1.13], will regenerate
+I 2026/11/16 20:53:52 cert.go:66: existing TLS certificates are invalid or expired, regenerating...
+I 2026/11/16 20:53:52 cert.go:75: generating TLS server certificates signed by local CA...
+I 2026/11/16 20:53:52 cert.go:81: generated TLS certificates at [/home/erov/siyuan-notes/conf]
+I 2026/11/16 20:53:52 serve.go:253: kernel [pid=22742] http server [127.0.0.1:42517] is booting (local HTTPS + HTTP/2 enabled)
+I 2026/11/16 20:53:52 box.go:72: auto stat [trees=1, blocks=2, dataSize=59.53 kB, assetsSize=0 B]
+I 2026/11/16 20:53:52 disk.go:21: disk usage [total=499.89 GB, used=40.12 GB, free=459.18 GB]
+I 2026/11/16 20:53:53 fixedport.go:41: fixed port service [127.0.0.1:6806] is running (HTTP/HTTPS dual mode)
+I 2026/11/16 20:53:54 cron.go:57: cron job [[RefreshRhyResultJob]] executed
+I 2026/11/16 20:54:41 hpath_refresh.go:407: refreshed document hpaths [20261112192939-gl5rv1c/20261116205420-rlp4box], docs [1], batches [2], elapsed [2004ms], active [3ms]
+I 2026/11/16 20:55:54 conf.go:738: exiting kernel [force=false, setCurrentWorkspace=true, execInstallPkg=0]
+I 2026/11/16 20:55:54 manager.go:194: kernel plugin manager is already stopped, skipping stop
+I 2026/11/16 20:55:54 database.go:1558: closed database
+I 2026/11/16 20:55:54 conf.go:1383: cleared workspace temp
+I 2026/11/16 20:55:54 sync.go:1270: sync websocket closed
+I 2026/11/16 20:55:55 conf.go:907: exited kernel

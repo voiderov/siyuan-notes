@@ -411,8 +411,7 @@
                 {
                   "children": [
                     {
-                      "active": true,
-                      "activeTime": "1794483302578",
+                      "activeTime": "1794833636056",
                       "children": {
                         "action": "cb-get-scroll",
                         "blockId": "20261112192939-86prxwy",
@@ -424,7 +423,23 @@
                       "docIcon": "",
                       "instance": "Tab",
                       "pin": false,
-                      "title": "A Fresh Start"
+                      "title": "Sinopsis Kunang-Kunang Kenanga"
+                    },
+                    {
+                      "active": true,
+                      "activeTime": "1794833753348",
+                      "children": {
+                        "action": "cb-get-scroll",
+                        "blockId": "20261116205420-rlp4box",
+                        "instance": "Editor",
+                        "mode": "wysiwyg",
+                        "notebookId": "20261112192939-gl5rv1c",
+                        "rootId": "20261116205420-rlp4box"
+                      },
+                      "docIcon": "",
+                      "instance": "Tab",
+                      "pin": false,
+                      "title": "Analisis Kunang-Kunang Kenanga"
                     }
                   ],
                   "height": "",
@@ -606,8 +621,8 @@
   "userData": "",
   "readonly": false,
   "serverAddrs": [
-    "http://192.168.1.32:34229",
-    "http://127.0.0.1:34229"
+    "http://192.168.1.13:42517",
+    "http://127.0.0.1:42517"
   ],
   "accessAuthCode": "",
   "oidc": {
@@ -626,18 +641,18 @@
     "claimRules": []
   },
   "system": {
-    "id": "240d2f9ac0fa4869bda403b03fa0e072",
-    "name": "myzzz",
+    "id": "80b8be6110ee4d9f8029e87e37578b6d",
+    "name": "zzz",
     "kernelVersion": "3.8.10",
     "os": "linux",
-    "osPlatform": "cachyos",
+    "osPlatform": "nobara",
     "container": "std",
     "isMicrosoftStore": false,
     "homeDir": "/home/erov",
-    "workspaceDir": "/home/erov/SiYuan/My Notes",
-    "appDir": "/tmp/.mount_siyuangeOGfF/resources",
-    "confDir": "/home/erov/SiYuan/My Notes/conf",
-    "dataDir": "/home/erov/SiYuan/My Notes/data",
+    "workspaceDir": "/home/erov/siyuan-notes",
+    "appDir": "/opt/SiYuan/resources",
+    "confDir": "/home/erov/siyuan-notes/conf",
+    "dataDir": "/home/erov/siyuan-notes/data",
     "networkServe": false,
     "networkServeTLS": false,
     "networkProxy": {
@@ -1719,9 +1734,9 @@
   "stat": {
     "treeCount": 1,
     "cTreeCount": 100,
-    "blockCount": 3,
+    "blockCount": 2,
     "cBlockCount": 5000,
-    "dataSize": 58081,
+    "dataSize": 59527,
     "cDataSize": 104857600,
     "assetsSize": 0,
     "cAssetsSize": 104857600
@@ -1760,7 +1775,7 @@
   "onboarding": {
     "state": "completed",
     "newUser": true,
-    "dismissed": false,
+    "dismissed": true,
     "notebookID": "20261112192939-gl5rv1c",
     "documentID": "20261112192939-86prxwy"
   },
