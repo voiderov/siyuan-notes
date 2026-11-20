@@ -15,8 +15,62 @@
       "instance": "Tab",
       "pin": false,
       "title": "Untitled"
+    },
+    {
+      "activeTime": "1794833636056",
+      "children": {
+        "action": "cb-get-scroll",
+        "blockId": "20261112192939-86prxwy",
+        "instance": "Editor",
+        "mode": "wysiwyg",
+        "notebookId": "20261112192939-gl5rv1c",
+        "rootId": "20261112192939-86prxwy"
+      },
+      "docIcon": "",
+      "instance": "Tab",
+      "pin": false,
+      "title": "Sinopsis Kunang-Kunang Kenanga"
+    },
+    {
+      "activeTime": "1795085081504",
+      "children": {
+        "action": "cb-get-scroll",
+        "blockId": "20261116205420-rlp4box",
+        "instance": "Editor",
+        "mode": "wysiwyg",
+        "notebookId": "20261112192939-gl5rv1c",
+        "rootId": "20261116205420-rlp4box"
+      },
+      "docIcon": "",
+      "instance": "Tab",
+      "pin": false,
+      "title": "Analisis Kunang-Kunang Kenanga"
     }
   ],
+  "local-exportpath": {
+    "path": "/home/erov/Downloads"
+  },
+  "local-exportpdf": {
+    "headingPageBreakLevels": [
+      2
+    ],
+    "keepFold": false,
+    "landscape": false,
+    "marginBottom": 1,
+    "marginLeft": 0.54,
+    "marginRight": 0.54,
+    "marginTop": 1,
+    "marginType": "default",
+    "mergeContentHeadingMode": "preserve",
+    "mergeDocHeadingMode": "flat",
+    "mergeSubdocs": true,
+    "pageSize": "A4",
+    "paged": true,
+    "removeAssets": true,
+    "scale": 1,
+    "titleImage": true,
+    "watermark": true
+  },
   "local-fileposition": {
     "20261112192939-86prxwy": {
       "endId": "20261116205357-694hws9",
@@ -29,12 +83,18 @@
     },
     "20261116205420-rlp4box": {
       "endId": "20261116205451-nol9x1c",
-      "focusEnd": 0,
-      "focusId": "20261116205438-4jf7bh1",
-      "focusStart": 0,
       "rootId": "20261116205420-rlp4box",
-      "scrollTop": 16775,
-      "startId": "20261116205438-l5qmspo"
+      "scrollTop": 6595,
+      "startId": "20261116205438-5e9l2ru"
+    },
+    "20261119184448-2lk7sy1": {
+      "endId": "20261119213335-4ch1dh2",
+      "focusEnd": 0,
+      "focusId": "20261119213335-4ch1dh2",
+      "focusStart": 0,
+      "rootId": "20261119184448-2lk7sy1",
+      "scrollTop": 6108,
+      "startId": "20261119192256-u21bg9i"
     }
   },
   "local-filespaths": [
@@ -59,6 +119,10 @@
     "expanded": [],
     "version": 2
   },
-  "siyuan-agent-last-greeting": "agentWelcomeFirst2",
-  "siyuan-agent-last-open": 1794483301252
+  "local-slash-usage": {
+    "inlineMath": 1,
+    "math": 1
+  },
+  "siyuan-agent-last-greeting": "agentWelcomeReturn2",
+  "siyuan-agent-last-open": 1795089909017
 }

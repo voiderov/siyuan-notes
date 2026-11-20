@@ -411,35 +411,20 @@
                 {
                   "children": [
                     {
-                      "activeTime": "1794833636056",
-                      "children": {
-                        "action": "cb-get-scroll",
-                        "blockId": "20261112192939-86prxwy",
-                        "instance": "Editor",
-                        "mode": "wysiwyg",
-                        "notebookId": "20261112192939-gl5rv1c",
-                        "rootId": "20261112192939-86prxwy"
-                      },
-                      "docIcon": "",
-                      "instance": "Tab",
-                      "pin": false,
-                      "title": "Sinopsis Kunang-Kunang Kenanga"
-                    },
-                    {
                       "active": true,
-                      "activeTime": "1794833753348",
+                      "activeTime": "1795165445357",
                       "children": {
                         "action": "cb-get-scroll",
-                        "blockId": "20261116205420-rlp4box",
+                        "blockId": "20261119184448-2lk7sy1",
                         "instance": "Editor",
                         "mode": "wysiwyg",
                         "notebookId": "20261112192939-gl5rv1c",
-                        "rootId": "20261116205420-rlp4box"
+                        "rootId": "20261119184448-2lk7sy1"
                       },
                       "docIcon": "",
                       "instance": "Tab",
                       "pin": false,
-                      "title": "Analisis Kunang-Kunang Kenanga"
+                      "title": "Soal Latihan Matematika PAS I Kelas XI MP 10"
                     }
                   ],
                   "height": "",
@@ -621,8 +606,8 @@
   "userData": "",
   "readonly": false,
   "serverAddrs": [
-    "http://192.168.1.13:42517",
-    "http://127.0.0.1:42517"
+    "http://192.168.1.29:39823",
+    "http://127.0.0.1:39823"
   ],
   "accessAuthCode": "",
   "oidc": {
@@ -1732,13 +1717,13 @@
     }
   },
   "stat": {
-    "treeCount": 1,
+    "treeCount": 3,
     "cTreeCount": 100,
-    "blockCount": 2,
+    "blockCount": 498,
     "cBlockCount": 5000,
-    "dataSize": 59527,
+    "dataSize": 1119741,
     "cDataSize": 104857600,
-    "assetsSize": 0,
+    "assetsSize": 902771,
     "cAssetsSize": 104857600
   },
   "api": {

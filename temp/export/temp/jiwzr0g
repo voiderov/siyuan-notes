@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en" data-theme-mode="light" data-light-theme="daylight" data-dark-theme="midnight">
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" id="baseStyle" href="/stage/build/export/base.css?v=3.8.10"/>
+    <link rel="stylesheet" type="text/css" id="themeDefaultStyle" href="/appearance/themes/daylight/theme.css?v=3.8.10"/>
+    <script src="/stage/protyle/js/protyle-html.js?v=3.8.10"></script>
+    
+    <title>Export PDF</title>
+    <style>
+        body {
+          margin: 0;
+          font-family: var(--b3-font-family);
+          background-color: var(--b3-body-background);
+        }
+        
+        #action {
+          width: 280px;
+          background-color: var(--b3-theme-background);
+          padding: 12px 0;
+          position: fixed;
+          right: 0;
+          top: 0;
+          overflow-y: auto;
+          bottom: 0;
+          overflow-x: hidden;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          border-left: 1px solid var(--b3-body-background);
+        }
+        
+        .b3-switch {
+            margin-left: 14px;
+        }
+
+        #action .b3-select:focus {
+            outline: none;
+        }
+        
+        #previewContainer {
+          position: fixed;
+          top: 0;
+          right: 280px;
+          bottom: 0;
+          left: 0;
+          overflow: auto;
+        }
+
+        #preview {
+          max-width: 800px;
+          margin: 24px auto;
+          position: relative;
+          min-height: calc(100% - 48px);
+          box-sizing: border-box;
+          background-color: var(--b3-theme-background);
+          box-shadow: var(--b3-dialog-shadow);
+        }
+
+        .exporting #previewContainer {
+          position: inherit;
+          overflow: visible;
+        }
+        
+        .exporting #preview {
+          position: inherit;
+          max-width: none;
+          box-shadow: none;
+        }
+        
+        .exporting {
+            background-color: var(--b3-theme-background);
+        }
+        
+        .exporting #preview::-webkit-scrollbar {
+          width: 0;
+          height: 0;
+        }
+        
+        .protyle-wysiwyg {
+          height: 100%;
+          overflow: auto;
+          box-sizing: border-box;
+        }
+        
+        .b3-label {
+          border-bottom: 1px solid var(--b3-theme-surface-lighter);
+          display: block;
+          color: var(--b3-theme-on-surface);
+          padding-bottom: 12px;
+          margin: 0 12px 12px 12px;
+        }
+        
+        .b3-label:last-child {
+            border-bottom: none;
+        }
+
+        #mergeHeadingOptions .b3-label:last-child {
+            border-bottom: 1px solid var(--b3-theme-surface-lighter);
+        }
+        
+        #preview .render-node[data-subtype="plantuml"] object {
+            max-width: 100%;
+        }
+
+        #preview .mindmap-view__toolbar {
+            display: none !important;
+        }
+
+        #preview .mindmap-view {
+            height: var(--mindmap-view-print-height, 420px);
+            min-height: 0;
+        }
+
+        #preview a.pdf-embedded-asset {
+            position: relative;
+            padding-right: 1em !important;
+        }
+
+        #preview .pdf-embedded-asset__icon {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 1em;
+            height: 1em;
+            color: currentColor;
+            pointer-events: none;
+        }
+
+        .exporting #preview .pdf-embedded-asset__icon {
+            visibility: hidden;
+        }
+        @font-face {
+  font-family: "Emojis Reset";
+  src: url(/appearance/fonts/Noto-COLRv1-2.051/Noto-COLRv1.woff2) format("woff2");
+  unicode-range: U+200d, U+2640, U+2642, U+fe0f, U+1f3fb-1f3ff, U+1f430, U+1f468-1f469, U+1f46f, U+1f6d8, U+1f93c, U+1f9d1, U+1fa70, U+1fa8a, U+1fa8e, U+1fac8, U+1facd, U+1faea, U+1faef, U+1f170-1f171, U+1f17e, U+1f17f, U+1f21a, U+1f22f, U+1f232-1f23a, U+1f250, U+1f251, U+1f32b, U+1f3bc,
+  U+1f411, U+1f42d, U+1f42e, U+1f431, U+1f435, U+1f441, U+1f4a8, U+1f4ab, U+1f525, U+25fd-25fe, U+2614-2615, U+2648-2653, U+267f, U+2693, U+26a1, U+26aa-26ab, U+1f0cf, U+1f311-1f318, U+1f42d-1f42e, U+1f431, U+1f435, U+1f600-1f64f,
+  U+1f79, U+1f8f, U+1fa79, U+1fae4, U+1fae9, U+1fac6, U+1fabe, U+1fadf,
+  U+200d, U+203c, U+2049, U+2122, U+2139, U+2194-2199, U+21a9, U+21aa, U+23cf, U+25aa, U+25ab, U+25b6, U+25c0, U+25fb-25fe,
+  U+2611, U+2615, U+2618, U+261d, U+2620, U+2622, U+2623, U+2626, U+262a, U+262e, U+2638-263a, U+2640, U+2642, U+2648-2653,
+  U+265f, U+2660, U+2663, U+2665, U+2666, U+267b, U+267e, U+267f, U+2692-2697, U+2699, U+269b, U+269c, U+26a0, U+26a1,
+  U+26a7, U+26aa, U+26ab, U+26b0, U+26b1, U+2702, U+2708, U+2709, U+270c, U+270d, U+2712, U+2714, U+2716, U+271d, U+2733,
+  U+2734, U+2744, U+2747, U+2763, U+2764, U+2934-2935, U+3030, U+303d, U+3297, U+3299, U+fe0f, U+e50a, U+a9, U+ae;
+  size-adjust: 92%;
+}
+@font-face {
+  font-family: "Emojis";
+  src: url(/appearance/fonts/Noto-COLRv1-2.051/Noto-COLRv1.woff2) format("woff2"),
+  local("Segoe UI Emoji"),
+  local("Segoe UI Symbol"),
+  local("Apple Color Emoji"),
+  local("Twemoji Mozilla"),
+  local("Noto Color Emoji"),
+  local("Android Emoji"),
+  local("EmojiSymbols");
+  size-adjust: 92%;
+}
+
+:root { --b3-font-size-editor: 16px; --b3-font-family-editor: var(--b3-font-family-protyle); --b3-font-family-editor-code: var(--b3-font-family-code); --b3-font-weight-editor-code: 400; --b3-database-attr-columns: 2; --b3-database-attr-column-flow: 0 }
+.b3-typography code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-variant-ligatures: none }
+.b3-typography:not(.b3-typography--default) code:not(.hljs), .protyle-wysiwyg span[data-type~=code] { font-family: var(--b3-font-family-editor-code); font-weight: var(--b3-font-weight-editor-code) }
+        
+        
+    </style>
+    
+</head>
+<body data-export-pdf="true" style="-webkit-print-color-adjust: exact;">
+<div id="action">
+    <div style="flex: 1;overflow-y:auto;overflow-x:hidden">
+        <div class="b3-label">
+            <div>
+                Page Size
+            </div>
+            <span class="fn__hr"></span>
+            <select class="b3-select" id="pageSize">
+                <option  value="A3">A3</option>
+                <option selected value="A4">A4</option>
+                <option  value="A5">A5</option>
+                <option  value="Legal">Legal</option>
+                <option  value="Letter">Letter</option>
+                <option  value="Tabloid">Tabloid</option>
+                <option  value="custom">Custom</option>
+            </select>
+            <div id="customPageSize" class="fn__none">
+                <div class="fn__hr"></div>
+                <label for="pageWidth"><small>Width</small></label>
+                <div class="fn__hr--small"></div>
+                <div class="fn__flex">
+                    <input id="pageWidth" class="b3-text-field fn__block" value="8.27" type="number" required min="0.01" step="0.01">
+                    <span class="fn__space"></span>
+                    <small class="fn__flex-center">in</small>
+                </div>
+                <div class="fn__hr"></div>
+                <label for="pageHeight"><small>Height</small></label>
+                <div class="fn__hr--small"></div>
+                <div class="fn__flex">
+                    <input id="pageHeight" class="b3-text-field fn__block" value="11.7" type="number" required min="0.01" step="0.01">
+                    <span class="fn__space"></span>
+                    <small class="fn__flex-center">in</small>
+                </div>
+            </div>
+        </div>
+        <div class="b3-label">
+            <div>
+                Page margins
+            </div>
+            <span class="fn__hr"></span>
+            <select class="b3-select" id="marginsType">
+                <option  value="default">Default</option>
+                <option  value="none">None</option>
+                <option  value="printableArea">Minimal</option>
+                <option  value="custom">Custom</option>
+            </select>
+            <div class="fn__none">
+                <span class="fn__hr"></span>
+                <small>Top</small>
+                <div class="fn__hr--small"></div>
+                <div class="fn__flex">
+                    <input id="marginsTop" class="b3-text-field fn__block" value="0" type="number" min="0" step="0.01">
+                    <span class="fn__space"></span>
+                    <small class="fn__flex-center" style="white-space: nowrap;">in</small>
+                </div>
+                <div class="fn__hr"></div>
+                <small>Right</small>
+                <div class="fn__hr--small"></div>
+                <div class="fn__flex">
+                    <input id="marginsRight" class="b3-text-field fn__block" value="0" type="number" min="0" step="0.01">
+                    <span class="fn__space"></span>
+                    <small class="fn__flex-center" style="white-space: nowrap;">in</small>
+                </div>
+                <div class="fn__hr"></div>
+                <small>Bottom</small>
+                <div class="fn__hr--small"></div>
+                <div class="fn__flex">
+                    <input id="marginsBottom" class="b3-text-field fn__block" value="0" type="number" min="0" step="0.01">
+                    <span class="fn__space"></span>
+                    <small class="fn__flex-center" style="white-space: nowrap;">in</small>
+                </div>
+                <div class="fn__hr"></div>
+                <small>Left</small>
+                <div class="fn__hr--small"></div>
+                <div class="fn__flex">
+                    <input id="marginsLeft" class="b3-text-field fn__block" value="0" type="number" min="0" step="0.01">
+                    <span class="fn__space"></span>
+                    <small class="fn__flex-center" style="white-space: nowrap;">in</small>
+                </div>
+            </div>
+        </div>
+        <div class="b3-label">
+            <div>
+                Page Scale
+                <span id="scaleTip" style="float: right;color: var(--b3-theme-on-background);">1</span>
+            </div>
+            <span class="fn__hr"></span>
+            <input style="width: 189px" value="1" id="scale" step="0.1" class="b3-slider" type="range" min="0.1" max="2">
+        </div>
+        <label class="b3-label">
+            <div>
+                Landscape page
+            </div>
+            <span class="fn__hr"></span>
+          <input id="landscape" class="b3-switch" type="checkbox" >
+        </label>
+        <label class="b3-label">
+            <div>
+                Embed assets
+            </div>
+            <span class="fn__hr"></span>
+            <input id="removeAssets" class="b3-switch" type="checkbox" checked>
+        </label>
+        <label class="b3-label">
+            <div>
+                Keep folded
+            </div>
+            <span class="fn__hr"></span>
+            <input id="keepFold" class="b3-switch" type="checkbox" >
+        </label>
+        <label class="b3-label">
+            <div>
+                Add document title
+            </div>
+            <span class="fn__hr"></span>
+            <input id="addTitle" class="b3-switch" type="checkbox" checked>
+        </label>
+        <label class="b3-label">
+            <div>
+                Export title image
+            </div>
+            <span class="fn__hr"></span>
+            <input id="titleImage" class="b3-switch" type="checkbox" checked>
+        </label>
+        <label id="customTitlePanel" class="b3-label">
+            <div>
+                Title
+            </div>
+            <span class="fn__hr"></span>
+            <input aria-label="Title" id="customTitle" class="b3-text-field fn__block" placeholder="Title">
+        </label>
+        <label class="b3-label">
+            <div>
+                Merge subdocuments
+            </div>
+            <span class="fn__hr"></span>
+            <input id="mergeSubdocs" class="b3-switch" type="checkbox" >
+        </label>
+        <div id="mergeHeadingOptions" class="fn__none">
+            <label class="b3-label">
+                <div>
+                    Document title levels
+                </div>
+                <span class="fn__hr"></span>
+                <select class="b3-select" id="mergeDocHeadingMode">
+                    <option value="flat" selected>Use heading 1 for all document titles</option>
+                    <option value="tree" >Follow the document hierarchy</option>
+                </select>
+            </label>
+            <label class="b3-label">
+                <div>
+                    Content heading levels
+                </div>
+                <span class="fn__hr"></span>
+                <select class="b3-select" id="mergeContentHeadingMode">
+                    <option value="preserve" selected>Keep the original levels</option>
+                    <option value="demote" >Place below document titles</option>
+                </select>
+            </label>
+        </div>
+        <label class="b3-label">
+            <div>
+                Export PDF watermark
+            </div>
+            <span class="fn__hr"></span>
+            <input id="watermark" class="b3-switch" type="checkbox" >
+        </label>
+        <label class="b3-label">
+            <div>
+                Paged
+            </div>
+            <span class="fn__hr"></span>
+            <input id="paged" class="b3-switch" type="checkbox" checked>
+        </label>
+        <div id="headingPageBreakOptions" class="b3-label">
+            <div>Start headings on a new page</div>
+            <div class="ft__smaller ft__on-surface">Select any heading levels; leave all unchecked for continuous layout; consecutive headings without body content stay together</div>
+            <div class="fn__hr"></div>
+            <div id="headingPageBreaks"><label class="fn__flex">
+    <span class="fn__flex-1">H1</span>
+    <input type="checkbox" class="b3-switch fn__flex-center" value="1" >
+</label><div class="fn__hr--small"></div><label class="fn__flex">
+    <span class="fn__flex-1">H2</span>
+    <input type="checkbox" class="b3-switch fn__flex-center" value="2" >
+</label><div class="fn__hr--small"></div><label class="fn__flex">
+    <span class="fn__flex-1">H3</span>
+    <input type="checkbox" class="b3-switch fn__flex-center" value="3" >
+</label><div class="fn__hr--small"></div><label class="fn__flex">
+    <span class="fn__flex-1">H4</span>
+    <input type="checkbox" class="b3-switch fn__flex-center" value="4" >
+</label><div class="fn__hr--small"></div><label class="fn__flex">
+    <span class="fn__flex-1">H5</span>
+    <input type="checkbox" class="b3-switch fn__flex-center" value="5" >
+</label><div class="fn__hr--small"></div><label class="fn__flex">
+    <span class="fn__flex-1">H6</span>
+    <input type="checkbox" class="b3-switch fn__flex-center" value="6" >
+</label></div>
+        </div>
+    </div>
+    <div class="fn__flex" style="padding: 0 12px">
+      <div class="fn__flex-1"></div>
+      <button class="b3-button b3-button--cancel">Cancel</button>
+      <div class="fn__space"></div>
+      <button disabled class="b3-button b3-button--text">Confirm</button>
+    </div>
+</div>
+<div id="previewContainer">
+    <div style="zoom:1" id="preview">
+        <div class="fn__loading" style="left:0;height:100vh"><span class="b3-loading b3-loading--large" aria-hidden="true"></span></div>
+    </div>
+</div>
+<script src="/appearance/icons/litheness/icon.js?v=3.8.10"></script>
+<script src="/stage/build/export/protyle-method.js?3.8.10"></script>
+<script src="/stage/protyle/js/lute/lute.min.js?3.8.10"></script>    
+<script>
+    const previewElement = document.getElementById('preview');
+    const getHeadingPageBreakLevels = () => Array.from(document.querySelectorAll("#headingPageBreaks input:checked"))
+        .map(input => Number(input.value));
+    const updateHeadingPageBreaks = () => {
+        const enabled = document.getElementById("paged").checked;
+        document.getElementById("headingPageBreakOptions").classList.toggle("fn__none", !enabled);
+        document.querySelectorAll("#headingPageBreaks input").forEach(input => {
+            input.disabled = !enabled;
+        });
+        Protyle.applyExportHeadingPageBreaks(previewElement, getHeadingPageBreakLevels(), enabled);
+    };
+    document.getElementById("headingPageBreaks").addEventListener("change", updateHeadingPageBreaks);
+    document.getElementById("paged").addEventListener("change", updateHeadingPageBreaks);
+    updateHeadingPageBreaks();
+    const getPageSizeDimensions = () => {
+        const pageSizes = {
+            A3: {width: 11.7, height: 16.54},
+            A4: {width: 8.27, height: 11.7},
+            A5: {width: 5.83, height: 8.27},
+            Legal: {width: 8.5, height: 14},
+            Letter: {width: 8.5, height: 11},
+            Tabloid: {width: 11, height: 17},
+        };
+        const pageSize = document.querySelector("#action #pageSize").value;
+        if (pageSize === "custom") {
+            const width = Number(document.getElementById("pageWidth").value);
+            const height = Number(document.getElementById("pageHeight").value);
+            return {
+                width: Number.isFinite(width) && width > 0 ? width : pageSizes.A4.width,
+                height: Number.isFinite(height) && height > 0 ? height : pageSizes.A4.height,
+            };
+        }
+        return pageSizes[pageSize] || pageSizes.A4;
+    };
+    const fixBlockWidth = async (printableWidth = false) => {
+        const isLandscape = document.querySelector("#landscape").checked;
+        const dimensions = getPageSizeDimensions();
+        let width = (isLandscape ? dimensions.height : dimensions.width) * 96;
+        let height = (isLandscape ? dimensions.width : dimensions.height) * 96;
+        const scale = parseFloat(document.querySelector("#scale").value);
+        if (printableWidth) {
+            width -= ((parseFloat(document.querySelector("#marginsLeft").value) || 0) +
+                (parseFloat(document.querySelector("#marginsRight").value) || 0)) * 96;
+        }
+        width = width / scale;
+        height = (height -
+            (parseFloat(document.querySelector("#marginsTop").value) +
+                parseFloat(document.querySelector("#marginsBottom").value)) * 96) / scale;
+        previewElement.style.width = width + "px";
+        width = width - parseFloat(previewElement.style.paddingLeft) * 96 * 2;
+        // 为保持代码块宽度一致，全部都进行宽度设定 https://github.com/siyuan-note/siyuan/issues/7692 
+        previewElement.querySelectorAll('.hljs').forEach((item) => {
+            // 强制换行 https://ld246.com/article/1679228783553
+            item.parentElement.setAttribute("linewrap", "true");
+            item.parentElement.style.width = "";
+            item.parentElement.style.boxSizing = "border-box";
+            item.parentElement.style.width = Math.min(item.parentElement.clientWidth, width) + "px";
+            item.removeAttribute('data-render');
+        })
+        Protyle.highlightRender(previewElement, "/stage/protyle", document.querySelector("#scale").value);
+        previewElement.querySelectorAll('[data-type="NodeMathBlock"]').forEach((item) => {
+            // 超级块内不能移除 width https://github.com/siyuan-note/siyuan/issues/14318
+            item.removeAttribute('data-render');
+        })
+        previewElement.querySelectorAll('[data-type="NodeCodeBlock"][data-subtype="mermaid"] svg').forEach((item) => {
+            item.style.maxHeight = height + "px";
+        })
+        await Protyle.mathRender(previewElement, "/stage/protyle", true);
+        previewElement.querySelectorAll("table").forEach(item => {
+            if (item.clientWidth > item.parentElement.clientWidth) {
+                item.style.zoom = (item.parentElement.clientWidth / item.clientWidth).toFixed(2) - 0.01;
+                item.parentElement.style.overflow = "hidden";
+            }
+        })
+        const images = Array.from(previewElement.querySelectorAll(".img img"));
+        // 先恢复用户设置的尺寸，再按当前纸张、边距和缩放计算，避免重复调整时只能缩小。
+        images.forEach(image => image.removeAttribute("data-export-image-fit"));
+        if (document.querySelector("#paged").checked) {
+            images.forEach(image => {
+                const block = image.closest("[data-node-id]") || image.parentElement;
+                const style = getComputedStyle(block);
+                const blockSpacing = [style.paddingTop, style.paddingBottom, style.marginTop, style.marginBottom]
+                    .reduce((sum, value) => sum + (parseFloat(value) || 0), 0);
+                let maxHeight = height;
+                // 图片缩窄后说明文字可能增加行数，逐步收紧高度以保留说明、段落间距和行盒的空间。
+                while (true) {
+                    const extraHeight = Math.max(0, image.parentElement.offsetHeight - image.offsetHeight) +
+                        (parseFloat(style.lineHeight) || parseFloat(style.fontSize) * 1.625) + blockSpacing;
+                    const nextHeight = Math.max(1, Math.floor(height - extraHeight - 1));
+                    if (image.clientHeight <= nextHeight || nextHeight >= maxHeight) {
+                        break;
+                    }
+                    maxHeight = nextHeight;
+                    image.style.setProperty("--export-image-max-height", maxHeight + "px");
+                    image.setAttribute("data-export-image-fit", "true");
+                }
+            });
+        }
+    }
+    const setPadding = () => {
+        const isLandscape = document.querySelector("#landscape").checked;
+        const topElement = document.querySelector("#marginsTop")
+        const rightElement = document.querySelector("#marginsRight")
+        const bottomElement = document.querySelector("#marginsBottom")
+        const leftElement = document.querySelector("#marginsLeft")
+        switch (document.querySelector("#marginsType").value) {
+            case "default":
+                if (isLandscape) {
+                    topElement.value = "0.42";
+                    rightElement.value = "0.42";
+                    bottomElement.value = "0.42";
+                    leftElement.value = "0.42";
+                } else {
+                    topElement.value = "1";
+                    rightElement.value = "0.54";
+                    bottomElement.value = "1";
+                    leftElement.value = "0.54";
+                }
+                break;
+            case "none": // none
+                topElement.value = "0";
+                rightElement.value = "0";
+                bottomElement.value = "0";
+                leftElement.value = "0";
+                break;
+            case "printableArea": // minimal
+                if (isLandscape) {
+                    topElement.value = ".07";
+                    rightElement.value = ".07";
+                    bottomElement.value = ".07";
+                    leftElement.value = ".07";
+                } else {
+                    topElement.value = "0.58";
+                    rightElement.value = "0.1";
+                    bottomElement.value = "0.58";
+                    leftElement.value = "0.1";
+                }
+                break;
+        }
+        document.getElementById('preview').style.padding = topElement.value + "in " 
+                             + rightElement.value + "in "
+                             + bottomElement.value + "in "
+                             + leftElement.value + "in";
+        setTimeout(() => {
+            fixBlockWidth();
+        }, 300);
+    }
+    const fetchPost = (url, data, cb) => {
+        fetch("" + url, {
+            method: "POST",
+            body: JSON.stringify(data)
+        }).then((response) => {
+            if (!response.ok) {
+                cb({ code: -response.status, msg: response.statusText, data: null });
+                return;
+            }
+            return response.json();
+        }).then((response) => {
+            if (response) {
+                cb(response);
+            }
+        })
+    }
+    const waitForImages = () => Promise.all(Array.from(previewElement.querySelectorAll("img")).map((image) => {
+        image.loading = "eager";
+        if (image.complete) {
+            return Promise.resolve();
+        }
+        return new Promise((resolve) => {
+            const finish = () => {
+                clearTimeout(timeout);
+                image.removeEventListener("load", finish);
+                image.removeEventListener("error", finish);
+                resolve();
+            };
+            const timeout = setTimeout(finish, 30000);
+            image.addEventListener("load", finish, {once: true});
+            image.addEventListener("error", finish, {once: true});
+        });
+    }));
+    let previewReady = Promise.resolve();
+    let previewRevision = 0;
+    const renderPreview = async (data) => {
+        previewElement.innerHTML = '<div style="padding:8px 0 0 0" class="protyle-wysiwyg protyle-wysiwyg--attr">' + data.content + '</div>';
+        const wysElement = previewElement.querySelector(".protyle-wysiwyg");
+        wysElement.setAttribute("data-doc-type", data.type || "NodeDocument");
+        Object.keys(data.attrs).forEach(key => {
+            wysElement.setAttribute(key, data.attrs[key]);
+        })
+        Protyle.setAutoDirection(previewElement, false);
+        await Protyle.renderExportJSEmbeds(wysElement, {
+            disabled: false,
+            disabledTip: "Safe mode is enabled, \u003ccode>//!js\u003c/code> query embed blocks are disabled",
+            rootID: "20261119184448-2lk7sy1",
+            headingMode: 0,
+        }, async (url, data) => {
+            const response = await fetch("" + url, {
+                method: "POST", body: JSON.stringify(data),
+            });
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        });
+        // https://github.com/siyuan-note/siyuan/issues/13669
+        wysElement.querySelectorAll('[data-node-id]').forEach((item) => {
+            if (item.querySelector(".img")) {
+                item.insertAdjacentHTML("beforeend", "<hr style='margin:0;border:0'>");
+            }
+        })
+        Protyle.mermaidRender(wysElement, "/stage/protyle");
+        Protyle.flowchartRender(wysElement, "/stage/protyle");
+        Protyle.graphvizRender(wysElement, "/stage/protyle");
+        Protyle.chartRender(wysElement, "/stage/protyle");
+        Protyle.mindmapRender(wysElement, "/stage/protyle");
+        Protyle.abcRender(wysElement, "/stage/protyle");
+        Protyle.htmlRender(wysElement);
+        Protyle.plantumlRender(wysElement, "/stage/protyle");
+        updateHeadingPageBreaks();
+        await waitForImages();
+    }
+    fetchPost("/api/export/exportPreviewHTML", {
+        id: "20261119184448-2lk7sy1",
+        keepJSEmbed: true,
+        keepFold: false,
+        pdf: true,
+        excludeTitleImage: false,
+        addTitle: true,
+        customTitle: "",
+        merge: false,
+        mergeDocHeadingMode: "flat",
+        mergeContentHeadingMode: "preserve",
+    }, response => {
+        if (response.code !== 0) {
+            alert(response.msg)
+            return;
+        }
+        document.title = response.data.name || "Untitled";
+        window.siyuan = {
+          config: {
+            appearance: { mode: 0, codeBlockThemeDark: "base16/dracula", codeBlockThemeLight: "github" },
+            editor: { 
+              allowSVGScriptTip: false,
+              allowHTMLBLockScript: false,
+              fontSize: 16,
+              codeLineWrap: true,
+              codeLigatures: false,
+              plantUMLServePath: "https://www.plantuml.com/plantuml/svg/~1",
+              codeSyntaxHighlightLineNum: false,
+              katexMacros: decodeURI(`%7B%7D`),
+            }
+          },
+          languages: {"listMindmapManageNodeColors":"Manage node colors","listMindmapManageLineColors":"Manage line colors","listMindmapDocumentLayout":"Document layout","listMindmapNodeColor":"Node color","listMindmapPaletteWaves":"Waves","listMindmapPaletteDream":"Dream","listMindmapPaletteAngel":"Angel","listMindmapPaletteReflection":"Reflection","listMindmapPaletteProsperity":"Prosperity","listMindmapPalettePolish":"Polish","listMindmapPalettePeace":"Peace","listMindmapPaletteReality":"Reality","listMindmapPaletteDulcet":"Dulcet","listMindmapPaletteOpulent":"Opulent","listMindmapPaletteHope":"Hope","listMindmapPaletteBlossom":"Blossom","listMindmapPaletteGrace":"Grace","listMindmapPalettePassion":"Passion","listMindmapPaletteTranquil":"Tranquil","listMindmapPaletteFlow":"Flow","listMindmapPaletteOmbre":"Ombre","listMindmapPaletteQuebrada":"Quebrada","listMindmapPaletteMundane":"Mundane","listMindmapPaletteVintage":"Vintage","listMindmapPaletteMelody":"Melody","listMindmapPaletteAffinity":"Affinity","listMindmapPaletteFragrance":"Fragrance","listMindmapPaletteTide":"Tide","listMindmapPaletteElemental":"Elemental","listMindmapPaletteAspect":"Aspect","listMindmapPaletteDistinct":"Distinct","listMindmapPaletteViolet":"Violet","listMindmapPaletteFlushed":"Flushed","listMindmapPaletteLucid":"Lucid","listMindmapPaletteBalmy":"Balmy","listMindmapPaletteFashion":"Fashion","listMindmapPaletteHalcyon":"Halcyon","listMindmapPaletteJolly":"Jolly","listMindmapPaletteCandy":"Candy","listMindmapPaletteVitality":"Vitality","listMindmapPaletteSubtropic":"Subtropic","listMindmapPaletteVeil":"Veil","listMindmapPalettePolychrome":"Polychrome","listMindmapPaletteCyber":"Cyber","listMindmapPalettePersimmon":"Persimmon","listMindmapPaletteVineyard":"Vineyard","listMindmapPaletteLilac":"Lilac","listMindmapPaletteAnimated":"Animated","listMindmapPaletteRainbow":"Rainbow","listMindmapPaletteNewStyle":"NewStyle","listMindmapPaletteMixed":"mixed","listMindmapRestoreWidth":"Restore original widths","listMindmapCanvasBackground":"Canvas background","listMindmapClearManualColors":"Clear manual colors","listMindmapLineColor":"Branch line color","listMindmapConnectors":"Connectors","listMindmapDefaultConnectorStyle":"Default connector style for new maps","listMindmapConnectorStyle":"Connector style","listMindmapConnectorSpline":"Curved fork","listMindmapConnectorOrthogonal":"Orthogonal","listMindmapConnectorBezier":"Curved fan","listMindmapConnectorRounded":"Rounded orthogonal","listMindmapSummaryBatch":"Create ${count} summaries","listMindmapSummaryConflict":"Summary ranges cross; adjust the selection","listMindmapAnchorReset":"Restore automatic connection points","listMindmapAnchorFallback":"The specified connection points are unavailable in this layout; temporarily showing automatic connection points","listMindmapAnchorInvalid":"This connection point cannot avoid nodes or controls; choose another position","listMindmapArrowDirection":"Arrow direction","listMindmapArrowForward":"Forward arrow","listMindmapArrowReverse":"Reverse arrow","listMindmapArrowBoth":"Arrows at both ends","listMindmapArrowNone":"No arrows","listMindmapLock":"Lock view","listMindmapUnlock":"Unlock view","listMindmapSummary":"Summary","listMindmapSummarySelect":"Select the last sibling node, or drag on blank canvas to select groups; tap blank canvas to select nodes individually","listMindmapExpandToLevel":"Expand to level ${level}","listMindmapRouteStart":"Drag to move the start connection point or reconnect to another node","listMindmapRouteEnd":"Drag to move the end connection point or reconnect to another node","listMindmapRouteHandle":"Drag to adjust the path; double-click the handle to reset","listMindmapRouteFallback":"The adjusted path is unavailable in this layout; showing the automatic path","listMindmapPlaceholder":"Enter text","listMindmapRoot":"Current list","listMindmapChild":"Add child node","listMindmapFit":"Fit to canvas","listMindmapInvalid":"Cannot read mind map settings; the original data has been preserved","listMindmapUnsupported":"Switch to list view to edit this content","listMindmapStale":"The content has changed; please edit it again","taskStatusTodo":"To do","taskStatusInProgress":"In progress","taskStatusDone":"Completed","taskStatusCanceled":"Canceled","connect":"Connect","task":"Task","customTaskStatus":"Custom task status","foldAll":"Fold all","color":"Color","text":"Text","collapse":"Collapse","expand":"Expand","zoomIn":"Zoom In","zoomOut":"Zoom Out","expandLevel":"Expand Level","mindmap":"Mind map block","fold":"Fold/Expand","expandAll":"Expand all","fontSize":"Font Size","exitFullscreen":"Exit Full Screen","colorFont":"Font Color","close":"Close","delete":"Delete","bold":"Bold","copy":"Copy","fullscreen":"Toggle Fullscreen","italic":"Italic","redo":"Redo","undo":"Undo"}
+        };
+        previewElement.addEventListener("click", (event) => {
+            let target = event.target;
+            while (target && !target.isEqualNode(previewElement)) {
+                if (target.tagName === "A") {
+                    const linkAddress = target.getAttribute("href");
+                    if (linkAddress.startsWith("#")) {
+                        // 导出预览模式点击块引转换后的脚注跳转不正确 https://github.com/siyuan-note/siyuan/issues/5700
+                        const hash = linkAddress.substring(1);
+                        previewElement.querySelector('[data-node-id="' + hash + '"], [id="' + hash + '"]').scrollIntoView();
+                        event.stopPropagation();
+                        event.preventDefault();
+                        return;
+                    }
+                } else if (target.classList.contains("protyle-action__copy")) {
+                    navigator.clipboard.writeText(target.parentElement.nextElementSibling.textContent.trimEnd().replace(/ /g, " ").replace(/‍```/g, "```"));
+                    event.preventDefault();
+                    event.stopPropagation();
+                    break;
+                }
+                target = target.parentElement;
+            }
+        });
+        const actionElement = document.getElementById('action');
+        const keepFoldElement = actionElement.querySelector('#keepFold');
+        keepFoldElement.addEventListener('change', () => {
+            refreshPreview();
+        });
+        const addTitleElement = actionElement.querySelector('#addTitle');
+        const titleImageElement = actionElement.querySelector('#titleImage');
+        titleImageElement.addEventListener('change', () => {
+            refreshPreview();
+        });
+        const customTitleElement = actionElement.querySelector('#customTitle');
+        const customTitlePanelElement = actionElement.querySelector('#customTitlePanel');
+        let titleRefreshTimer;
+        let titleComposing = false;
+        addTitleElement.addEventListener('change', () => {
+            customTitlePanelElement.classList.toggle('fn__none', !addTitleElement.checked);
+            refreshPreview();
+        });
+        const scheduleTitleRefresh = () => {
+            window.clearTimeout(titleRefreshTimer);
+            titleRefreshTimer = window.setTimeout(refreshPreview, 300);
+        };
+        customTitleElement.addEventListener('compositionstart', () => {
+            titleComposing = true;
+            window.clearTimeout(titleRefreshTimer);
+        });
+        customTitleElement.addEventListener('compositionend', () => {
+            titleComposing = false;
+            scheduleTitleRefresh();
+        });
+        customTitleElement.addEventListener('input', () => {
+            if (!titleComposing) {
+                scheduleTitleRefresh();
+            }
+        });
+        const mergeSubdocsElement = actionElement.querySelector('#mergeSubdocs');
+        const mergeHeadingOptionsElement = actionElement.querySelector('#mergeHeadingOptions');
+        const mergeDocHeadingModeElement = actionElement.querySelector('#mergeDocHeadingMode');
+        const mergeContentHeadingModeElement = actionElement.querySelector('#mergeContentHeadingMode');
+        mergeSubdocsElement.addEventListener('change', () => {
+            mergeHeadingOptionsElement.classList.toggle('fn__none', !mergeSubdocsElement.checked);
+            refreshPreview();
+        });
+        mergeDocHeadingModeElement.addEventListener('change', () => {
+            refreshPreview();
+        });
+        mergeContentHeadingModeElement.addEventListener('change', () => {
+            refreshPreview();
+        });
+        const removeAssetsElement = actionElement.querySelector("#removeAssets");
+        const  watermarkElement = actionElement.querySelector('#watermark');
+        const refreshPreview = () => {
+            const revision = ++previewRevision;
+            actionElement.querySelector('.b3-button--text').disabled = true;
+            previewElement.innerHTML = '<div class="fn__loading" style="left:0;height: 100vh"><span class="b3-loading b3-loading--large" aria-hidden="true"></span></div>'
+            fetchPost("/api/export/exportPreviewHTML", {
+                id: "20261119184448-2lk7sy1",
+                keepJSEmbed: true,
+                keepFold: keepFoldElement.checked,
+                pdf: true,
+                excludeTitleImage: !titleImageElement.checked,
+                addTitle: addTitleElement.checked,
+                customTitle: customTitleElement.value,
+                merge: mergeSubdocsElement.checked,
+                mergeDocHeadingMode: mergeDocHeadingModeElement.value,
+                mergeContentHeadingMode: mergeContentHeadingModeElement.value,
+            }, response2 => {
+                if (revision !== previewRevision) {
+                    return;
+                }
+                if (response2.code !== 0) {
+                    alert(response2.msg)
+                    return;
+                }
+                setPadding();
+                previewReady = renderPreview(response2.data).then(() => {
+                    if (revision !== previewRevision) {
+                        return;
+                    }
+                    reserveEmbeddedAssetSpace(removeAssetsElement.checked);
+                    fixBlockWidth();
+                    actionElement.querySelector('.b3-button--text').disabled = false;
+                });
+            })
+        };
+
+        actionElement.querySelector("#scale").addEventListener("input", () => {
+            const scale = actionElement.querySelector("#scale").value;
+            actionElement.querySelector("#scaleTip").innerText = scale;
+            previewElement.style.zoom = scale;
+            fixBlockWidth();
+        })
+        actionElement.querySelector("#pageSize").addEventListener('change', () => {
+            actionElement.querySelector("#customPageSize").classList.toggle("fn__none",
+                actionElement.querySelector("#pageSize").value !== "custom");
+            fixBlockWidth();
+        });
+        ["pageWidth", "pageHeight"].forEach(id => {
+            actionElement.querySelector("#" + id).addEventListener("input", () => fixBlockWidth());
+        });
+        actionElement.querySelector("#marginsType").addEventListener('change', (event) => {
+            setPadding();
+            if (event.target.value === "custom") {
+                event.target.nextElementSibling.classList.remove("fn__none");
+            } else {
+                event.target.nextElementSibling.classList.add("fn__none");
+            }
+        });
+        actionElement.querySelector("#marginsTop").addEventListener('change', () => {
+            setPadding();
+        });
+        actionElement.querySelector("#marginsRight").addEventListener('change', () => {
+            setPadding();
+        });
+        actionElement.querySelector("#marginsBottom").addEventListener('change', () => {
+            setPadding();
+        });
+        actionElement.querySelector("#marginsLeft").addEventListener('change', () => {
+            setPadding();
+        });
+        actionElement.querySelector("#landscape").addEventListener('change', (e) => {
+            setPadding();
+        });
+        actionElement.querySelector("#paged").addEventListener('change', () => {
+            fixBlockWidth();
+        });
+        actionElement.querySelector('.b3-button--cancel').addEventListener('click', () => {
+            const {ipcRenderer}  = require("electron");
+            ipcRenderer.send("siyuan-cmd", "destroy")
+        });
+        const buildExportConfig = (unPagedPageSize) => {
+            const selectedPageSize = actionElement.querySelector("#pageSize").value;
+            const pageSize = selectedPageSize === "custom" ? getPageSizeDimensions() : selectedPageSize;
+            // https://www.electronjs.org/docs/latest/api/web-contents#contentsprinttopdfoptions
+            // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-printToPDF
+            return {
+                title: "Export PDF",
+                pdfOptions: {
+                    printBackground: true,
+                    landscape: actionElement.querySelector("#landscape").checked,
+                    marginType: actionElement.querySelector("#marginsType").value,
+                    margins: {
+                        top: parseFloat(document.querySelector("#marginsTop").value) || 0,
+                        bottom: parseFloat(document.querySelector("#marginsBottom").value) || 0,
+                        left: parseFloat(document.querySelector("#marginsLeft").value) || 0,
+                        right: parseFloat(document.querySelector("#marginsRight").value) || 0,
+                    },
+                    scale: parseFloat(actionElement.querySelector("#scale").value),
+                    pageSize: unPagedPageSize || pageSize,
+                },
+                pageSize,
+                titleImage: titleImageElement.checked,
+                keepFold: keepFoldElement.checked,
+                addTitle: addTitleElement.checked,
+                customTitle: customTitleElement.value,
+                mergeSubdocs: mergeSubdocsElement.checked,
+                mergeDocHeadingMode: mergeDocHeadingModeElement.value,
+                mergeContentHeadingMode: mergeContentHeadingModeElement.value,
+                watermark: watermarkElement.checked,
+                removeAssets: removeAssetsElement.checked,
+                paged: !unPagedPageSize,
+                headingPageBreakLevels: getHeadingPageBreakLevels(),
+                rootId: "20261119184448-2lk7sy1",
+                parentWindowId: 2,
+            };
+        };
+        const reserveEmbeddedAssetSpace = (enabled) => {
+            // 为内嵌附件注解预留空间，避免覆盖后续文本。
+            previewElement.querySelectorAll("a[href]").forEach((item) => {
+                const url = new URL(item.href);
+                const embedded = enabled && url.hostname === "127.0.0.1" && url.pathname.includes("/assets/");
+                item.classList.toggle("pdf-embedded-asset", embedded);
+                const iconElement = item.querySelector(".pdf-embedded-asset__icon");
+                if (embedded && !iconElement) {
+                    item.insertAdjacentHTML("beforeend", '<svg aria-hidden="true" class="pdf-embedded-asset__icon"><use xlink:href="#iconPaperclip"></use></svg>');
+                } else if (!embedded) {
+                    iconElement?.remove();
+                }
+            });
+        };
+        removeAssetsElement.addEventListener("change", () => {
+            reserveEmbeddedAssetSpace(removeAssetsElement.checked);
+        });
+        actionElement.querySelector('.b3-button--text').addEventListener('click', async () => {
+            await previewReady;
+            if (actionElement.querySelector("#pageSize").value === "custom") {
+                for (const id of ["pageWidth", "pageHeight"]) {
+                    if (!actionElement.querySelector("#" + id).reportValidity()) {
+                        return;
+                    }
+                }
+            }
+            const {ipcRenderer}  = require("electron");
+            const defaultPath = "";
+            const fileName = ((E=>E.replace(/\\\\|\/|"|:|\*|\?|\\|'|<|>|\|/g,""))(response.data.name || "") || "Untitled") + ".pdf";
+            const dialogOptions = {
+                cmd: "showSaveDialog",
+                title: "Export PDF",
+                buttonLabel: "Save",
+                defaultPath: require("path").join(defaultPath, fileName),
+                filters: [{name: "PDF", extensions: ["pdf"]}],
+                properties: ["createDirectory", "showOverwriteConfirmation"],
+            };
+            const result = await ipcRenderer.invoke("siyuan-get", dialogOptions);
+            if (result.canceled || !result.filePath) {
+                return;
+            }
+            reserveEmbeddedAssetSpace(removeAssetsElement.checked);
+            await waitForImages();
+            const isPaged = actionElement.querySelector("#paged").checked;
+            updateHeadingPageBreaks();
+            document.body.classList.add("exporting");
+            previewElement.style.zoom = "";
+            previewElement.style.padding = "6px 0 0 0";
+            if (!isPaged) {
+                // 按打印可用宽度完成排版后测量，避免预览边距、缩放和列表布局影响长页高度。
+                previewElement.style.margin = "0";
+                previewElement.style.minHeight = "0";
+            }
+            await fixBlockWidth(true);
+            await document.fonts.ready;
+            await waitForImages();
+            let exportConfig;
+            if (!isPaged) {
+                const dimensions = getPageSizeDimensions();
+                const landscape = actionElement.querySelector("#landscape").checked;
+                const scale = parseFloat(actionElement.querySelector("#scale").value);
+                const margins = (parseFloat(document.querySelector("#marginsTop").value) || 0) +
+                    (parseFloat(document.querySelector("#marginsBottom").value) || 0);
+                // 纸张高度包含缩放后的正文和打印边距，并预留一个像素以容纳单位换算误差。
+                const previewHeight = Math.max((previewElement.scrollHeight * scale + 1) / 96 + margins,
+                    landscape ? dimensions.width : dimensions.height);
+                exportConfig = buildExportConfig(landscape ? {
+                    height: dimensions.height,
+                    width: previewHeight,
+                } : {
+                    width: dimensions.width,
+                    height: previewHeight,
+                });
+            } else {
+                exportConfig = buildExportConfig();
+            }
+            exportConfig.filePath = result.filePath;
+            actionElement.remove();
+            ipcRenderer.send("siyuan-export-pdf", exportConfig);
+        });
+        setPadding();
+        previewReady = renderPreview(response.data).then(() => {
+            if (previewRevision !== 0) {
+                return;
+            }
+            reserveEmbeddedAssetSpace(removeAssetsElement.checked);
+            fixBlockWidth();
+            actionElement.querySelector('.b3-button--text').disabled = false;
+        });
+        window.addEventListener("keydown", (event) => {
+            if (event.key === "Escape") {
+                const {ipcRenderer}  = require("electron");
+                ipcRenderer.send("siyuan-cmd", "destroy")
+                event.preventDefault();
+            }
+        })
+    });
+</script>
+
+</body></html>
