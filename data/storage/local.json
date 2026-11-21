@@ -45,8 +45,48 @@
       "instance": "Tab",
       "pin": false,
       "title": "Analisis Kunang-Kunang Kenanga"
+    },
+    {
+      "active": true,
+      "activeTime": "1795171227212",
+      "children": {
+        "action": "cb-get-scroll",
+        "blockId": "20261120184026-3myzzlm",
+        "instance": "Editor",
+        "mode": "wysiwyg",
+        "notebookId": "20261112192939-gl5rv1c",
+        "rootId": "20261120184026-3myzzlm"
+      },
+      "docIcon": "",
+      "instance": "Tab",
+      "pin": false,
+      "title": "Kisi Kisi PAS I Kelas 11 PKN"
+    },
+    {
+      "active": true,
+      "activeTime": "1795174833160",
+      "children": {
+        "action": "cb-get-scroll",
+        "blockId": "20261120194032-bxbx4v3",
+        "instance": "Editor",
+        "mode": "wysiwyg",
+        "notebookId": "20261112192939-gl5rv1c",
+        "rootId": "20261120194032-bxbx4v3"
+      },
+      "docIcon": "",
+      "instance": "Tab",
+      "pin": false,
+      "title": "2026-11-20"
     }
   ],
+  "local-dialogposition": {
+    "dialog-setting": {
+      "height": 936,
+      "left": 320,
+      "top": 52,
+      "width": 1280
+    }
+  },
   "local-exportpath": {
     "path": "/home/erov/Downloads"
   },
@@ -88,13 +128,22 @@
       "startId": "20261116205438-5e9l2ru"
     },
     "20261119184448-2lk7sy1": {
-      "endId": "20261119213335-4ch1dh2",
-      "focusEnd": 0,
-      "focusId": "20261119213335-4ch1dh2",
-      "focusStart": 0,
+      "endId": "20261120182423-czyjpwj",
+      "focusEnd": 4,
+      "focusId": "20261120182423-czyjpwj",
+      "focusStart": 4,
       "rootId": "20261119184448-2lk7sy1",
-      "scrollTop": 6108,
+      "scrollTop": 9633,
       "startId": "20261119192256-u21bg9i"
+    },
+    "20261120203256-9cy0hcj": {
+      "endId": "20261120210059-m6sdnk2",
+      "focusEnd": 0,
+      "focusId": "20261120210059-m6sdnk2",
+      "focusStart": 0,
+      "rootId": "20261120203256-9cy0hcj",
+      "scrollTop": 2808,
+      "startId": "20261120203256-vd2347r"
     }
   },
   "local-filespaths": [

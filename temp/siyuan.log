@@ -349,3 +349,84 @@ I 2026/11/20 17:19:56 index_fix.go:163: start auto fixing index on idle...
 I 2026/11/20 17:19:56 index_fix.go:102: start fixing index...
 I 2026/11/20 17:19:57 index_fix.go:131: finish fixing index
 I 2026/11/20 17:19:57 index_fix.go:165: finish auto fixing index on idle
+I 2026/11/20 18:40:39 hpath_refresh.go:407: refreshed document hpaths [20261112192939-gl5rv1c/20261120184026-3myzzlm], docs [1], batches [1], elapsed [2001ms], active [0ms]
+I 2026/11/20 19:03:57 box.go:72: auto stat [trees=4, blocks=506, dataSize=1.42 MB, assetsSize=1.2 MB]
+I 2026/11/20 19:03:57 disk.go:21: disk usage [total=499.89 GB, used=111.67 GB, free=386.02 GB]
+I 2026/11/20 19:20:56 index_fix.go:163: start auto fixing index on idle...
+I 2026/11/20 19:20:56 index_fix.go:102: start fixing index...
+I 2026/11/20 19:20:57 index_fix.go:131: finish fixing index
+I 2026/11/20 19:20:57 index_fix.go:165: finish auto fixing index on idle
+I 2026/11/20 19:40:28 file.go:2426: removed doc [20261112192939-gl5rv1c/20261120184026-3myzzlm.sy]
+D 2026/11/20 19:40:28 websocket.go:36: websocket failed [channel="main", app=u0xwl, id=b69247e4-aad9-4076-b401-f03f11c79744, type=protyle]: read tcp 127.0.0.1:39823->127.0.0.1:48588: use of closed network connection
+I 2026/11/20 19:40:38 file.go:2420: removed children dir [20261112192939-gl5rv1c/20261120194032-2du05ci]
+I 2026/11/20 19:40:38 file.go:2426: removed doc [20261112192939-gl5rv1c/20261120194032-2du05ci.sy]
+D 2026/11/20 19:40:38 websocket.go:36: websocket failed [channel="main", app=u0xwl, id=7417f8d4-00a6-44d4-9136-f57fff4c266f, type=protyle]: read tcp 127.0.0.1:39823->127.0.0.1:58050: use of closed network connection
+I 2026/11/20 20:33:03 hpath_refresh.go:407: refreshed document hpaths [20261112192939-gl5rv1c/20261120203256-9cy0hcj], docs [1], batches [1], elapsed [2302ms], active [0ms]
+I 2026/11/20 20:33:18 hpath_refresh.go:407: refreshed document hpaths [20261112192939-gl5rv1c/20261120203256-9cy0hcj], docs [1], batches [1], elapsed [1102ms], active [0ms]
+I 2026/11/20 20:33:24 hpath_refresh.go:407: refreshed document hpaths [20261112192939-gl5rv1c/20261120203256-9cy0hcj], docs [1], batches [1], elapsed [1902ms], active [0ms]
+I 2026/11/20 21:03:57 box.go:72: auto stat [trees=4, blocks=618, dataSize=1.46 MB, assetsSize=1.2 MB]
+I 2026/11/20 21:03:57 disk.go:21: disk usage [total=499.89 GB, used=111.64 GB, free=386.06 GB]
+I 2026/11/20 21:21:56 index_fix.go:163: start auto fixing index on idle...
+I 2026/11/20 21:21:56 index_fix.go:102: start fixing index...
+I 2026/11/20 21:21:57 index_fix.go:131: finish fixing index
+I 2026/11/20 21:21:57 index_fix.go:165: finish auto fixing index on idle
+I 2026/11/20 21:35:18 conf.go:738: exiting kernel [force=false, setCurrentWorkspace=true, execInstallPkg=0]
+I 2026/11/20 21:35:18 manager.go:194: kernel plugin manager is already stopped, skipping stop
+I 2026/11/20 21:35:18 database.go:1558: closed database
+I 2026/11/20 21:35:18 conf.go:1383: cleared workspace temp
+I 2026/11/20 21:35:19 sync.go:1270: sync websocket closed
+I 2026/11/20 21:35:19 conf.go:907: exited kernel
+I 2026/11/21 12:30:16 working.go:159: 
+      ___                                   ___           ___           ___
+     /  /\        ___           ___        /__/\         /  /\         /__/\
+    /  /:/_      /  /\         /__/|       \  \:\       /  /::\        \  \:\
+   /  /:/ /\    /  /:/        |  |:|        \  \:\     /  /:/\:\        \  \:\
+  /  /:/ /::\  /__/::\        |  |:|    ___  \  \:\   /  /:/~/::\   _____\__\:\
+ /__/:/ /:/\:\ \__\/\:\__   __|__|:|   /__/\  \__\:\ /__/:/ /:/\:\ /__/::::::::\
+ \  \:\/:/~/:/    \  \:\/\ /__/::::\   \  \:\ /  /:/ \  \:\/:/__\/ \  \:\~~\~~\/
+  \  \::/ /:/      \__\::/    ~\~~\:\   \  \:\  /:/   \  \::/       \  \:\  ~~~
+   \__\/ /:/       /__/:/       \  \:\   \  \:\/:/     \  \:\        \  \:\
+     /__/:/        \__\/         \__\/    \  \::/       \  \:\        \  \:\
+     \__\/                                 \__\/         \__\/         \__\/
+I 2026/11/21 12:30:16 runtime.go:96: kernel is booting:
+    * ver [3.8.10]
+    * arch [amd64]
+    * os [nobara]
+    * pid [8381]
+    * runtime mode [prod]
+    * working directory [/opt/SiYuan/resources]
+    * read only [false]
+    * container [std]
+    * database [ver=202607031200]
+    * workspace directory [/home/erov/siyuan-notes]
+I 2026/11/21 12:30:17 conf.go:319: loaded conf [/home/erov/siyuan-notes/conf/conf.json]
+I 2026/11/21 12:30:17 runtime.go:236: use network proxy [direct]
+I 2026/11/21 12:30:17 working.go:671: database [/home/erov/siyuan-notes/temp/siyuan.db] size [1.06 MB]
+I 2026/11/21 12:30:17 working.go:671: database [/home/erov/siyuan-notes/temp/blocktree.db] size [286.73 kB]
+I 2026/11/21 12:30:17 working.go:671: database [/home/erov/siyuan-notes/temp/history.db] size [118.79 kB]
+I 2026/11/21 12:30:17 working.go:671: database [/home/erov/siyuan-notes/temp/asset_content.db] size [24.58 kB]
+I 2026/11/21 12:30:17 conf.go:1163: tree/block count [4/616]
+I 2026/11/21 12:30:17 working.go:222: kernel booted
+I 2026/11/21 12:30:17 manager.go:156: kernel plugins are disabled by configuration, skipping start
+I 2026/11/21 12:30:17 pandoc.go:161: built-in pandoc [ver=3.10.1, bin=/opt/SiYuan/resources/pandoc/bin/pandoc]
+I 2026/11/21 12:30:17 cert.go:123: certificate missing current IP address [10.65.2.204], will regenerate
+I 2026/11/21 12:30:17 cert.go:66: existing TLS certificates are invalid or expired, regenerating...
+I 2026/11/21 12:30:17 cert.go:75: generating TLS server certificates signed by local CA...
+I 2026/11/21 12:30:17 cert.go:81: generated TLS certificates at [/home/erov/siyuan-notes/conf]
+I 2026/11/21 12:30:17 serve.go:253: kernel [pid=8381] http server [127.0.0.1:45799] is booting (local HTTPS + HTTP/2 enabled)
+I 2026/11/21 12:30:17 box.go:72: auto stat [trees=4, blocks=616, dataSize=1.46 MB, assetsSize=1.2 MB]
+I 2026/11/21 12:30:17 disk.go:21: disk usage [total=499.89 GB, used=112.19 GB, free=385.51 GB]
+I 2026/11/21 12:30:18 fixedport.go:41: fixed port service [127.0.0.1:6806] is running (HTTP/HTTPS dual mode)
+I 2026/11/21 12:30:21 cron.go:57: cron job [[RefreshRhyResultJob]] executed
+I 2026/11/21 12:38:17 index_fix.go:163: start auto fixing index on idle...
+I 2026/11/21 12:38:17 index_fix.go:102: start fixing index...
+I 2026/11/21 12:38:17 index_fix.go:131: finish fixing index
+I 2026/11/21 12:38:17 index_fix.go:165: finish auto fixing index on idle
+D 2026/11/21 12:50:14 websocket.go:36: websocket failed [channel="main", app=hwbnk, id=e9d83ba5-2980-4aba-9fc4-bc3de8e835dc, type=protyle]: websocket: close 1006 (abnormal closure): unexpected EOF
+D 2026/11/21 12:50:14 websocket.go:36: websocket failed [channel="main", app=hwbnk, id=e79faad2-464b-4c5b-aef9-05d61d6db7a6, type=outline]: websocket: close 1006 (abnormal closure): unexpected EOF
+D 2026/11/21 12:50:14 websocket.go:36: websocket failed [channel="main", app=hwbnk, id=7ad5c782-1716-42a5-951f-d2c3b0e056ae, type=main]: websocket: close 1006 (abnormal closure): unexpected EOF
+D 2026/11/21 12:50:14 websocket.go:36: websocket failed [channel="main", app=hwbnk, id=de85a41c-bce1-4d80-8143-4c193f3b644a, type=filetree]: websocket: close 1006 (abnormal closure): unexpected EOF
+D 2026/11/21 16:00:18 websocket.go:36: websocket failed [channel="main", app=hwbnk, id=de85a41c-bce1-4d80-8143-4c193f3b644a, type=filetree]: websocket: close 1006 (abnormal closure): unexpected EOF
+D 2026/11/21 16:00:18 websocket.go:36: websocket failed [channel="main", app=hwbnk, id=e9d83ba5-2980-4aba-9fc4-bc3de8e835dc, type=protyle]: websocket: close 1006 (abnormal closure): unexpected EOF
+D 2026/11/21 16:00:18 websocket.go:36: websocket failed [channel="main", app=hwbnk, id=e79faad2-464b-4c5b-aef9-05d61d6db7a6, type=outline]: websocket: close 1006 (abnormal closure): unexpected EOF
+D 2026/11/21 16:00:18 websocket.go:36: websocket failed [channel="main", app=hwbnk, id=7ad5c782-1716-42a5-951f-d2c3b0e056ae, type=main]: websocket: close 1006 (abnormal closure): unexpected EOF

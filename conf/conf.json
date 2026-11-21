@@ -403,7 +403,7 @@
               ],
               "direction": "tb",
               "instance": "Layout",
-              "size": "320px",
+              "size": "232px",
               "type": "left"
             },
             {
@@ -411,8 +411,7 @@
                 {
                   "children": [
                     {
-                      "active": true,
-                      "activeTime": "1795165445357",
+                      "activeTime": "1795176971051",
                       "children": {
                         "action": "cb-get-scroll",
                         "blockId": "20261119184448-2lk7sy1",
@@ -425,6 +424,22 @@
                       "instance": "Tab",
                       "pin": false,
                       "title": "Soal Latihan Matematika PAS I Kelas XI MP 10"
+                    },
+                    {
+                      "active": true,
+                      "activeTime": "1795250696174",
+                      "children": {
+                        "action": "cb-get-scroll",
+                        "blockId": "20261120203256-9cy0hcj",
+                        "instance": "Editor",
+                        "mode": "wysiwyg",
+                        "notebookId": "20261112192939-gl5rv1c",
+                        "rootId": "20261120203256-9cy0hcj"
+                      },
+                      "docIcon": "",
+                      "instance": "Tab",
+                      "pin": false,
+                      "title": "Latihan PKN PAS I Kelas XI"
                     }
                   ],
                   "height": "",
@@ -491,7 +506,7 @@
           {
             "hotkeyLangId": "fileTree",
             "icon": "iconFiles",
-            "show": true,
+            "show": false,
             "size": {
               "height": 0,
               "width": 232
@@ -502,7 +517,7 @@
           {
             "hotkeyLangId": "outline",
             "icon": "iconOutline",
-            "show": false,
+            "show": true,
             "size": {
               "height": 0,
               "width": 232
@@ -606,8 +621,8 @@
   "userData": "",
   "readonly": false,
   "serverAddrs": [
-    "http://192.168.1.29:39823",
-    "http://127.0.0.1:39823"
+    "http://10.65.2.204:45799",
+    "http://127.0.0.1:45799"
   ],
   "accessAuthCode": "",
   "oidc": {
@@ -1717,13 +1732,13 @@
     }
   },
   "stat": {
-    "treeCount": 3,
+    "treeCount": 4,
     "cTreeCount": 100,
-    "blockCount": 498,
+    "blockCount": 616,
     "cBlockCount": 5000,
-    "dataSize": 1119741,
+    "dataSize": 1451427,
     "cDataSize": 104857600,
-    "assetsSize": 902771,
+    "assetsSize": 1191530,
     "cAssetsSize": 104857600
   },
   "api": {
